@@ -10,7 +10,7 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{ product }}</h1>
+      <h1>{{ title }}</h1>
       <p>{{description}}</p>
       <div class="product-image">
         <img :src="image" />
@@ -30,9 +30,9 @@
       </ul>
 
       <div
-        v-for="variant in variants"
+        v-for="(variant, index) in variants"
         :key="variant.id"
-        @mouseover="updateImage(variant.image)"
+        @mouseover="updateVariant(index)"
         class="color-circle"
         :style="{ backgroundColor: variant.color }"
       ></div>
@@ -43,7 +43,7 @@
         class="button"
         :class="{ disabledButton: !inStock }"
         :disabled="!inStock"
-        @click="addToCart"
+        v-on:click="addToCart"
       >
         Add to Cart
       </button>
