@@ -10,49 +10,20 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{ title }}</h1>
-      <p>{{description}}</p>
-      <div class="product-image">
-        <img :src="image" />
-      </div>
-      <div class="product-image">
-        <a :href="url">detail</a>
-      </div>
+      <div class="nav-bar"></div>
 
-      <p v-if="inventory > 10">In Stock</p>
-      <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-      <p v-else>Out of Stock</p>
-
-      <p v-if="onSale">On Sale</p>
-
-      <ul>
-        <li v-for="detail in details">{{ detail }}</li>
-      </ul>
-
-      <div
-        v-for="(variant, index) in variants"
-        :key="variant.id"
-        @mouseover="updateVariant(index)"
-        class="color-circle"
-        :style="{ backgroundColor: variant.color }"
-      ></div>
-
-      <div v-for="(size,index) in sizes" :key="index">{{ size}}</div>
-      <h2>{{cart}}</h2>
-      <button
-        class="button"
-        :class="{ disabledButton: !inStock }"
-        :disabled="!inStock"
-        v-on:click="addToCart"
-      >
-        Add to Cart
-      </button>
-      <button class="button" @click="decraseToCart">Decrase to Cart</button>
+      <div class="cart">Cart({{ cart.length }})</div>
+      <product-display
+        :premium="premium"
+        @add-to-cart="updateCart"
+      ></product-display>
     </div>
 
     <!-- Import Js -->
     <script src="./main.js"></script>
     <!-- Mount App -->
+    <script src="./components/ProductDisplay.js"></script>
+
     <script>
       const mountedApp = app.mount("#app");
     </script>
